@@ -2,7 +2,14 @@ import os
 import glob
 import random
 from pydub import AudioSegment
+import os
+import glob
+import random
+from pydub import AudioSegment
 
+def create_snippets(wav_file):
+    # Logic to create snippets
+    pass
 # Search for wav files in the current directory
 wav_files = glob.glob("./*.wav")
 
