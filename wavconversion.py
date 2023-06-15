@@ -15,15 +15,3 @@ def convert_mp4_to_wav(input_file, output_file):
 def find_first_mp4():
     mp4_files = glob.glob('*.mp4')
     return mp4_files[0] if mp4_files else None
-
-input_file = find_first_mp4()
-
-if input_file:
-    output_file = os.path.splitext(input_file)[0] + ".wav"
-
-    convert_mp4_to_wav(input_file, output_file)
-
-    # Delete the input MP4 file
-    os.remove(input_file)
-else:
-    print("No MP4 files found in the current directory.")

@@ -8,7 +8,7 @@ def search_videos(search_term):
     return search_results
 
 def duration_in_seconds(duration_str):
-    duration_parts = duration_str.split(':')
+    duration_parts = str(duration_str).split(':')
     if len(duration_parts) == 3:
         hours, minutes, seconds = map(int, duration_parts)
         return hours * 3600 + minutes * 60 + seconds
@@ -32,11 +32,3 @@ def download_random_video(search_results):
     print(f"Downloading video: {video_title}")
     video_stream.download(filename=f"{video_title}.mp4")
     print(f"Video downloaded: {video_title}.mp4")
-
-search_term = input("Enter a search term: ")
-search_results = search_videos(search_term)
-
-if search_results:
-    download_random_video(search_results)
-else:
-    print("No results found.")

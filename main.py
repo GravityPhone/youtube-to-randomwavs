@@ -1,7 +1,7 @@
 import os
 import glob
 from downloader import search_videos, download_random_video
-from wavconversion import convert_mp4_to_wav
+from wavconversion import convert_mp4_to_wav, find_first_mp4
 from snippetmaker import create_snippets
 
 def main():
@@ -11,15 +11,13 @@ def main():
     # Search for videos and download one
     search_results = search_videos(search_term)
     if search_results:
-        video_title = download_random_video(search_results)
+        download_random_video(search_results)
     else:
         print("No results found.")
         return
 
     # Find the downloaded video
-    mp4_files = glob.glob('*.mp4')
-    input_file = mp4_files[0] if mp4_files else None
-
+    input_file = find_first_mp4()
     if input_file:
         # Convert the downloaded video to WAV
         output_file = os.path.splitext(input_file)[0] + ".wav"
