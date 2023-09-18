@@ -1,20 +1,18 @@
-import os
 import glob
-from downloader import search_videos, download_random_video
-from wavconversion import convert_mp4_to_wav, find_first_mp4
+import os
+
+from downloader import download_random_video, search_videos
 from snippetmaker import create_snippets
+from wavconversion import convert_mp4_to_wav, find_first_mp4
 
-def main():
-    # Ask the user for a search term
-    search_term = input("Enter a search term: ")
 
+def main(search_term):
     # Search for videos and download one
     search_results = search_videos(search_term)
     if search_results:
         download_random_video(search_results)
     else:
-        print("No results found.")
-        return
+        return "No results found."
 
     # Find the downloaded video
     input_file = find_first_mp4()
@@ -29,7 +27,8 @@ def main():
         # Create snippets from the WAV file
         create_snippets(output_file)
     else:
-        print("No MP4 files found in the current directory.")
+        return "No MP4 files found in the current directory."
+
 
 if __name__ == "__main__":
     main()
