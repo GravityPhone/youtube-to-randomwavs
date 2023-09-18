@@ -1,7 +1,9 @@
-import os
 import glob
+import os
 import random
+
 from pydub import AudioSegment
+
 
 def create_snippets(wav_file):
     # Extract the base name of the wav file without the extension
@@ -12,10 +14,13 @@ def create_snippets(wav_file):
     if not os.path.exists(dir_name):
         os.makedirs(dir_name)
 
-    # Create 10-second snippets from the provided wav file, 
+    # Create 10-second snippets from the provided wav file,
     # and export them to the new directory
     snippet_counter = 1
-    audio = AudioSegment.from_wav(wav_file) 
+    audio = AudioSegment.from_wav(wav_file)
+
+    # Initialize a string to store the results
+    results = ""
 
     while snippet_counter <= 10:
         # Select a random starting point for the snippet
@@ -32,7 +37,7 @@ def create_snippets(wav_file):
 
         # Export the snippet to the new file
         snippet.export(snippet_path, format="wav")
-        print(f"Exported {snippet_path}")
+        results += f"Exported {snippet_path}\n"
 
         # Increment the snippet counter for the next iteration
         snippet_counter += 1
@@ -40,4 +45,5 @@ def create_snippets(wav_file):
     # Delete the original wav file
     os.remove(wav_file)
 
-
+    # Return the results string
+    return results
